@@ -13,6 +13,13 @@ brew install watchman
 npm install -g react-native-cli
 ```
 
+```
+cd ios
+gem install earlgrey
+earlgrey -t buttonTests # requires shared scheme
+carthage update EarlGrey --platform ios
+```
+
 ## Running the apps
 
 ```
