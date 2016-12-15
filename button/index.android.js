@@ -9,6 +9,7 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
+  Button,
   View
 } from 'react-native';
 
@@ -27,7 +28,12 @@ export default class button extends Component {
           Shake or press menu button for dev menu
         </Text>
 
-        
+        <Button
+          onPress={()=>{}}
+          title="automation"
+          testID="automation_button_id"
+          accessibilityLabel="automation_button_label"
+        />
       </View>
     );
   }
