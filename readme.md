@@ -1,10 +1,7 @@
 ## Debugging
 
-Cmd + D - open debug menu, enable debugging JS remotely
-Cmd + Opt + J - open chrome dev tools `http://localhost:8081/debugger-ui`
-
-button -> Button -> Text -> RCTText
-
+- Cmd + D - Open debug menu, enable debugging JS remotely
+- Cmd + Opt + J - Open chrome dev tools `http://localhost:8081/debugger-ui`
 
 ## Getting started
 
