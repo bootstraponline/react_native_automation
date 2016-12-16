@@ -13,6 +13,8 @@ import {
   View
 } from 'react-native';
 
+import testLabel from './common.js'
+
 export default class button extends Component {
   render() {
     return (
@@ -31,8 +33,7 @@ export default class button extends Component {
         <Button
           onPress={()=>{}}
           title="automation"
-          testID="automation_button_id"
-          accessibilityLabel="automation_button_label"
+          {...testLabel('automation_button')}
         />
       </View>
     );
