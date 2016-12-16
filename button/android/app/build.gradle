@@ -95,6 +95,9 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+        testInstrumentationRunnerArguments disableAnalytics: 'true'
     }
     splits {
         abi {
@@ -151,13 +154,16 @@ dependencies {
         exclude module: 'support-annotations'
         exclude module: 'jsr305'
     }
+
+    /* espresso-contrib is not compatible with react-native due to appcompat dependency conflict.
     androidTestCompile("com.android.support.test.espresso:espresso-contrib:$espressoVersion") {
         exclude module: 'recyclerview-v7'
         exclude module: 'support-v4'
         exclude module: 'appcompat-v7'
         exclude module: 'support-annotations'
         exclude module: 'jsr305'
-    }
+    }*/
+
     androidTestCompile("com.android.support.test.espresso:espresso-idling-resource:$espressoVersion")
     androidTestCompile("com.android.support.test.espresso:espresso-intents:$espressoVersion") {
         exclude module: 'support-annotations'
