@@ -5,17 +5,21 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.button.MainActivity;
 
-import org.hamcrest.Matcher;
-import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+
+import android.support.test.espresso.ViewInteraction;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
-import static android.support.test.espresso.matcher.ViewMatchers.withTagKey;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withTagValue;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.is;
 
 @RunWith(AndroidJUnit4.class)
@@ -44,12 +48,16 @@ public class MainActivityTest {
     }
 
     @Test
-    public void activityRendersAutomationButton() {
+    public void activityRenders() {
         // Wait for screen to draw. We'll have to use an idle resource counter in the future.
         sleep(5000);
 
-        onView(withContentDescription("automation_button_label")).perform(click());
-        // view tag doesn't work
+        onView(withContentDescription("automation_button_label")).check(matches(isDisplayed()));
+        // view tag doesn't work on buttons
         // onView(withTagValue(is((Object) "automation_button_id"))).perform(click());
+
+        // image can be found by label & id
+        onView(withContentDescription("automation_image_label")).check(matches(isDisplayed()));
+        onView(withTagValue(is((Object) "automation_image_id"))).check(matches(isDisplayed()));
     }
 }

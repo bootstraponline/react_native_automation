@@ -14,17 +14,6 @@ export default class button extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-
         <Button
           onPress={()=>{}}
           title="automation"
@@ -45,14 +34,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
 });
+
+/*
+
+EarlGrey iOS UI hierarchy
+
+<Button> is:
+<RCTView:0x7f99f1013fc0; AX=Y; AX.label='automation_button_label'; AX.frame={{153.66666666666666, 333.33333333333331}, {106.99999999999997, 37.666666666666686}}; AX.activationPoint={207.16666666666663, 352.16666666666663}; AX.traits='UIAccessibilityTraitButton'; AX.focused='N'; frame={{153.66666666666666, 333.33333333333331}, {107, 37.666666666666664}}; opaque; alpha=1>
+
+<Image> is:
+<RCTImageView:0x7f99f1014710; AX=N; AX.id='automation_image_id'; AX.label='automation_image_label'; AX.frame={{133, 371}, {148, 136}}; AX.activationPoint={207, 439}; AX.traits='UIAccessibilityTraitImage'; AX.focused='N'; frame={{133, 371}, {148, 136}}; alpha=1>
+
+*/
