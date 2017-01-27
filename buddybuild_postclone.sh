@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# note: sudo works on buddybuild
+# echo password | sudo -S command
+
 # list rubies (ruby-2.2.5, ruby-2.3.1)
 chruby
 
