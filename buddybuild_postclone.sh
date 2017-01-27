@@ -3,6 +3,9 @@
 # note: sudo works on buddybuild
 # echo password | sudo -S command
 
+echo "skipped"
+exit 0
+
 # list rubies (ruby-2.2.5, ruby-2.3.1)
 chruby
 
