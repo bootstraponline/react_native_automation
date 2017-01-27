@@ -15,13 +15,10 @@ curl -L https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-
 # add 'gcloud' to path
 export PATH="`pwd`/google-cloud-sdk/bin:$PATH"
 
-# update
-gcloud --quiet components update
-
 # authenticate
-# echo $GCLOUD_KEY | base64 --decode > "gcloudkey.json"
-# gcloud config set project "$GCLOUD_PROJECT"
-# gcloud auth activate-service-account --key-file "gcloudkey.json" "$GCLOUD_USER"
+echo $GCLOUD_KEY | base64 --decode > "gcloudkey.json"
+gcloud config set project "$GCLOUD_PROJECT"
+gcloud auth activate-service-account --key-file "gcloudkey.json" "$GCLOUD_USER"
 
 # list folders
 ls -la
