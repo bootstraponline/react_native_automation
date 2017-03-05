@@ -2,6 +2,8 @@
 require 'English'
 require 'fileutils'
 
+require_relative 'screenshots'
+
 def join(*args)
   File.expand_path(File.join(*args))
 end
@@ -41,5 +43,8 @@ puts "EarlGrey documents found: #{documents_dir}"
 # note that any files in a directory won't be attached to the build job.
 # the file dir must be flattened or compressed.
 FileUtils.cp_r documents_dir, ENV['BITRISE_DEPLOY_DIR']
+
+# inline screenshots
+Screenshots.new.run
 
 puts 'Finished saving test artifacts'
