@@ -26,6 +26,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		AF5EB7EE6424F877D951F329 /* EarlGrey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FCB338F294A01B5C78B3C6D /* EarlGrey.framework */; };
 		F9535BBB1E03475300C8A430 /* buttonTestEarlGrey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9535BBA1E03475300C8A430 /* buttonTestEarlGrey.swift */; };
+		F96964231E6BCA650001C065 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96964221E6BCA650001C065 /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,6 +197,7 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		F9535BBA1E03475300C8A430 /* buttonTestEarlGrey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = buttonTestEarlGrey.swift; sourceTree = "<group>"; };
+		F96964221E6BCA650001C065 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,6 +279,7 @@
 				00E356F01AD99517003FC87E /* Supporting Files */,
 				353A81F91E0F5069EECEC24C /* EarlGrey.swift */,
 				F9535BBA1E03475300C8A430 /* buttonTestEarlGrey.swift */,
+				F96964221E6BCA650001C065 /* Utils.swift */,
 			);
 			path = buttonTests;
 			sourceTree = "<group>";
@@ -711,6 +714,7 @@
 			files = (
 				55707C4D39AD1A9DCD73B297 /* EarlGrey.swift in Sources */,
 				F9535BBB1E03475300C8A430 /* buttonTestEarlGrey.swift in Sources */,
+				F96964231E6BCA650001C065 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

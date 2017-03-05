@@ -91,33 +91,35 @@ private func GREYSetCurrentAsFailable() {
   }
 }
 
-class EarlGrey: NSObject {
-  public class func select(elementWithMatcher matcher:GREYMatcher,
-                           file: String = #file,
-                           line: UInt = #line) -> GREYElementInteraction {
-    return EarlGreyImpl.invoked(fromFile: file, lineNumber: line).selectElement(with: matcher)
+open class EarlGrey: NSObject {
+  open class func select(elementWithMatcher matcher:GREYMatcher,
+                         file: StaticString = #file,
+                         line: UInt = #line) -> GREYElementInteraction {
+    return EarlGreyImpl.invoked(fromFile: file.description, lineNumber: line)
+      .selectElement(with: matcher)
   }
 
-  public class func setFailureHandler(handler: GREYFailureHandler,
-                                      file: String = #file,
-                                      line: UInt = #line) {
-    return EarlGreyImpl.invoked(fromFile: file, lineNumber: line).setFailureHandler(handler)
+  open class func setFailureHandler(handler: GREYFailureHandler,
+                                    file: StaticString = #file,
+                                    line: UInt = #line) {
+    return EarlGreyImpl.invoked(fromFile: file.description, lineNumber: line)
+      .setFailureHandler(handler)
   }
 
-  public class func handle(exception: GREYFrameworkException,
-                           details: String,
-                           file: String = #file,
-                           line: UInt = #line) {
-    return EarlGreyImpl.invoked(fromFile: file, lineNumber: line).handle(exception,
-                                                                         details: details)
+  open class func handle(exception: GREYFrameworkException,
+                         details: String,
+                         file: StaticString = #file,
+                         line: UInt = #line) {
+    return EarlGreyImpl.invoked(fromFile: file.description, lineNumber: line)
+      .handle(exception, details: details)
   }
 
-  @discardableResult public class func rotateDeviceTo(orientation: UIDeviceOrientation,
-                                                      errorOrNil: UnsafeMutablePointer<NSError?>!,
-                                                      file: String = #file,
-                                                      line: UInt = #line)
+  @discardableResult open class func rotateDeviceTo(orientation: UIDeviceOrientation,
+                                                    errorOrNil: UnsafeMutablePointer<NSError?>!,
+                                                    file: StaticString = #file,
+                                                    line: UInt = #line)
     -> Bool {
-      return EarlGreyImpl.invoked(fromFile: file, lineNumber: line)
+      return EarlGreyImpl.invoked(fromFile: file.description, lineNumber: line)
         .rotateDevice(to: orientation,
                       errorOrNil: errorOrNil)
   }
@@ -133,9 +135,19 @@ extension GREYInteraction {
     return self.assert(with: matcher(), error: error)
   }
 
-
   @discardableResult public func using(searchAction: GREYAction,
                                        onElementWithMatcher matcher: GREYMatcher) -> Self {
     return self.usingSearch(searchAction, onElementWith: matcher)
+  }
+}
+
+extension GREYCondition {
+  open func waitWithTimeout(seconds: CFTimeInterval) -> Bool {
+    return self.wait(withTimeout: seconds)
+  }
+
+  open func waitWithTimeout(seconds: CFTimeInterval, pollInterval: CFTimeInterval)
+    -> Bool {
+      return self.wait(withTimeout: seconds, pollInterval: pollInterval)
   }
 }

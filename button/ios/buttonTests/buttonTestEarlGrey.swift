@@ -13,8 +13,11 @@ class EarlGreyExampleSwiftTests: XCTestCase {
     //
     // react-native must set accessibility: true on elements to match on them by label
     // https://facebook.github.io/react-native/docs/accessibility.html
-    EarlGrey.select(elementWithMatcher: grey_accessibilityLabel("automation_image_label")).assert(grey_sufficientlyVisible());
 
-    EarlGrey.select(elementWithMatcher: grey_accessibilityID("automation_image_id")).assert(grey_sufficientlyVisible());
+    let autoImage = e.selectBy(label: "automation_image_label")
+    autoImage.assert(grey_sufficientlyVisible());
+
+    let autoImage2 = e.selectBy(id: "automation_image_id")
+    autoImage2.assert(grey_sufficientlyVisible());
   }
 }
