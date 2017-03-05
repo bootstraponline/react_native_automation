@@ -22,6 +22,9 @@ brew tap facebook/fb
 brew install fbsimctl --HEAD)
   lane :test_without_building do
     video_out = File.expand_path(File.join(__dir__, '..', 'video.mp4'))
+
+    video_out = ENV['BITRISE_DEPLOY_DIR'] if bitrise?
+
     simulator = FBSimctl.new video_out: video_out
 
     begin
@@ -29,11 +32,10 @@ brew install fbsimctl --HEAD)
       simulator.start_recording
 
       Xcode8.test_without_building(scheme: SCHEME)
-
-      simulator.stop_recording
     ensure
+      simulator.stop_recording
       simulator.stop_server
+      ui_important "Saved video to: #{video_out}"
     end
   end
 end
-

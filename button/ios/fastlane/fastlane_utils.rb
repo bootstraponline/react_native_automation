@@ -17,6 +17,10 @@ def fastlane_require(gem_name)
   Fastlane::FastlaneRequire.install_gem_if_needed(gem_name: gem_name, require_gem: true)
 end
 
+def bitrise?
+  @bitrise ||= !!ENV['BITRISE_IO']
+end
+
 def retry_cmd cmd_name, limit = 3, &block
   # if execution fails then we retry up to limit - 1 times.
   tries = limit
