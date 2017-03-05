@@ -73,7 +73,7 @@ class Screenshots
           HTML
 
           test_method.css('section.test-detail').last.add_next_sibling image_fragment
-          screenshot_count += 1
+          @screenshot_count += 1
         end
       end
     end
