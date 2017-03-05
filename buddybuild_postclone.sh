@@ -29,7 +29,7 @@ ls -la
 # save file listing to gcloud
 timestamp=$(date +"%Y-%m-%d_%H:%M:%S")
 file_list="files_$timestamp.txt"
-echo "test" > "$file_list"
+echo "test" > "$file_list" # find / .
 gsutil cp "$file_list" gs://buddybuild
 
 # exit early
