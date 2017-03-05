@@ -22,7 +22,7 @@ def metadata_id(plist)
   result
 end
 
-bundle_id     = ENV['APP_BUNDLE_ID']
+bundle_id = ENV['APP_BUNDLE_ID']
 raise 'ENV APP_BUNDLE_ID not set' unless bundle_id
 search_glob   = join(app_path(bundle_id), '*/.*.plist')
 documents_dir = nil
