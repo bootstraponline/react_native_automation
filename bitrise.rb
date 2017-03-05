@@ -38,8 +38,8 @@ end
 raise 'failed to find documents dir for app' unless documents_dir
 puts "EarlGrey documents found: #{documents_dir}"
 
-# any files in $BITRISE_DEPLOY_DIR wil be attached to the build
+# any files in BITRISE_DEPLOY_DIR wil be attached to the build
 # raw-xcodebuild-output.log is saved there by default.
-FileUtils.cp_r documents_dir, $BITRISE_DEPLOY_DIR
+FileUtils.cp_r documents_dir, ENV['BITRISE_DEPLOY_DIR']
 
 puts 'Finished saving test artifacts'
