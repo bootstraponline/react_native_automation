@@ -43,3 +43,7 @@ android/app/libs
 
 # Carthage
 */Carthage/Checkouts
+
+# Fastlane
+button/ios/fastlane/report.xml
+xctestrun/

@@ -1,0 +1,39 @@
+fastlane_version '2.19.1' rescue update_fastlane
+
+default_platform :ios
+
+require_relative 'fastlane_utils'
+require_relative 'xcode_8_xctestrun'
+require_relative 'fbsimctl'
+Xcode8.runner = self.runner
+
+SCHEME = 'buttonTests'
+
+platform :ios do
+
+  desc 'build-for-testing'
+  lane :build_for_testing do
+    Xcode8.build_for_testing(scheme: SCHEME)
+  end
+
+  desc %q(test-without-building.
+Requires fbsimctl
+brew tap facebook/fb
+brew install fbsimctl --HEAD)
+  lane :test_without_building do
+    video_out = File.expand_path(File.join(__dir__, '..', 'video.mp4'))
+    simulator = FBSimctl.new video_out: video_out
+
+    begin
+      simulator.start_server
+      simulator.start_recording
+
+      Xcode8.test_without_building(scheme: SCHEME)
+
+      simulator.stop_recording
+    ensure
+      simulator.stop_server
+    end
+  end
+end
+
