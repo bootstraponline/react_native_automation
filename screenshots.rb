@@ -73,7 +73,7 @@ class Screenshots
       end
     end
 
-    File.write input_html + 'img.html', html.to_html
+    File.write input_html, html.to_html
     puts "encoded #{screenshot_count} screenshot#{screenshot_count > 1 ? 's' : ''}"
   end
 end
