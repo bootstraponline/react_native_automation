@@ -31,7 +31,7 @@ func waitFor(_ seconds:TimeInterval) {
   RunLoop.current.run(until: timeout)
 }
 
-let elementTimeout:TimeInterval = 120.0 // seconds
+let elementTimeout:TimeInterval = 30.0 // seconds
 
 // MARK: Element actions
 extension GREYElementInteraction {

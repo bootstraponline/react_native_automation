@@ -3,8 +3,10 @@ import XCTest
 
 class EarlGreyExampleSwiftTests: XCTestCase {
 
+  // calling .assert will bypass the waiting matcher.
+  // instead assertExists is used.
   func testButton() {
-    EarlGrey.select(elementWithMatcher: grey_accessibilityLabel("automation_button_label")).assert(grey_sufficientlyVisible());
+    e.selectBy(label: "automation_button_label").assertExists()
   }
 
   func testImage() {
@@ -15,9 +17,14 @@ class EarlGreyExampleSwiftTests: XCTestCase {
     // https://facebook.github.io/react-native/docs/accessibility.html
 
     let autoImage = e.selectBy(label: "automation_image_label")
-    autoImage.assert(grey_sufficientlyVisible());
+    autoImage.assertExists();
 
     let autoImage2 = e.selectBy(id: "automation_image_id")
-    autoImage2.assert(grey_sufficientlyVisible());
+    autoImage2.assertExists();
+  }
+
+  func testExpectedFailure() {
+    let autoImage = e.selectBy(label: "does_not_exist")
+    autoImage.assertExists();
   }
 }
