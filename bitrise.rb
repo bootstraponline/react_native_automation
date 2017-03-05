@@ -1,5 +1,3 @@
-require 'rubygems'
-
 # stdlib
 require 'English'
 require 'fileutils'
@@ -28,7 +26,6 @@ search_glob   = join(app_path(bundle_id), '*/.*.plist')
 documents_dir = nil
 
 Dir.glob(search_glob) do |plist_path|
-
   if metadata_id(plist_path) == bundle_id
     documents_dir = join(File.dirname(plist_path), 'Documents')
     break
@@ -40,6 +37,9 @@ puts "EarlGrey documents found: #{documents_dir}"
 
 # any files in BITRISE_DEPLOY_DIR wil be attached to the build
 # raw-xcodebuild-output.log is saved there by default.
+#
+# note that any files in a directory won't be attached to the build job.
+# the file dir must be flattened or compressed.
 FileUtils.cp_r documents_dir, ENV['BITRISE_DEPLOY_DIR']
 
 puts 'Finished saving test artifacts'
