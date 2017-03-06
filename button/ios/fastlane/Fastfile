@@ -18,6 +18,8 @@ APP_BUNDLE_ID = 'org.reactjs.native.example.button'
 platform :ios do
 
   def install_deps
+    return if @install_deps
+    @install_deps = true # install deps once
     execute_action 'yarn' do
       _execute 'cd .. && yarn'
     end
