@@ -11,7 +11,7 @@ require_relative 'fbsimctl'
 require_relative 'earl_grey_data'
 Xcode8.runner = self.runner
 
-SCHEME = 'buttonTests'
+SCHEME        = 'buttonTests'
 APP_BUNDLE_ID = 'org.reactjs.native.example.button'
 
 platform :ios do
@@ -21,11 +21,21 @@ platform :ios do
     Xcode8.build_for_testing(scheme: SCHEME)
   end
 
+  desc 'test-without-building no video'
+  lane :test_without_building do
+    begin
+      Xcode8.test_without_building(scheme: SCHEME)
+    ensure
+      EarlGreyData.new.collect APP_BUNDLE_ID
+    end
+  end
+
   desc %q(test-without-building.
 Requires fbsimctl
 brew tap facebook/fb
 brew install fbsimctl --HEAD)
-  lane :test_without_building do
+  lane :test_without_building_video do
+    # todo: bitrise errors with Connection refused - connect(2) for "localhost" port 8091 (localhost:8091)
     video_out = File.expand_path(File.join(__dir__, '..', 'video.mp4'))
 
     video_out = ENV['BITRISE_DEPLOY_DIR'] if bitrise?
