@@ -17,6 +17,25 @@ APP_BUNDLE_ID = 'org.reactjs.native.example.button'
 
 platform :ios do
 
+  def install_deps
+    execute_action 'yarn' do
+      _execute 'cd .. && yarn'
+    end
+
+    execute_action 'carthage' do
+      _execute 'carthage update EarlGrey --platform ios'
+    end
+  end
+
+  before_all do
+    install_deps if bitrise?
+  end
+
+  desc 'Install app deps'
+  lane :deps do
+    install_deps
+  end
+
   desc 'build-for-testing'
   lane :build_for_testing do
     Xcode8.build_for_testing(scheme: SCHEME)

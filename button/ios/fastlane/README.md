@@ -29,6 +29,11 @@ xcode-select --install
 </table>
 # Available Actions
 ## iOS
+### ios deps
+```
+fastlane ios deps
+```
+install app deps
 ### ios build_for_testing
 ```
 fastlane ios build_for_testing
