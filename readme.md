@@ -21,6 +21,18 @@ earlgrey -t buttonTests # requires shared scheme
 carthage update EarlGrey --platform ios
 ```
 
+## Install iOS deps
+
+```bash
+#!/bin/bash
+set -euxo pipefail
+
+cd button
+yarn
+cd ios
+carthage update EarlGrey --platform ios
+```
+
 ## Running the apps
 
 ```
