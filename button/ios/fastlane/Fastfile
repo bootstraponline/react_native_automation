@@ -34,7 +34,8 @@ platform :ios do
     # https://github.com/bitrise-io/steps-xcode-test/blob/2e6d684446eef1a15b9792385c4487ab4fccdc05/xcodeutil/xcodeutil.go#L237
     # https://github.com/bitrise-io/steps-xcode-test/blob/583b25d9fe1a096bf565d4f87cb9365363ee61fd/main.go#L657
     execute_action('boot simulator') do
-      _execute "open -a Simulator --args -CurrentDeviceUDID #{TEST_SIMULATOR.udid}"
+      simulator_app = '/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app'
+      _execute %Q(open "#{simulator_app}" "--args" "-CurrentDeviceUDID" "#{TEST_SIMULATOR.udid}")
       sleep 60
     end
 
