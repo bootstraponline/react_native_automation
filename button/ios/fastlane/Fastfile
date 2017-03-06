@@ -27,6 +27,30 @@ platform :ios do
     end
   end
 
+  def boot_simulator
+    # Error Domain=IDETestOperationsObserverErrorDomain
+    # Code=5 "Early unexpected exit, operation never finished bootstrapping - no restart will be attempted"
+
+    # boot simulator before running tests on bitrise.
+    # xcrun simctl boot will not boot a full simulator.
+    #
+    # https://github.com/bitrise-io/steps-xcode-test/blob/2e6d684446eef1a15b9792385c4487ab4fccdc05/xcodeutil/xcodeutil.go#L237
+    # https://github.com/bitrise-io/steps-xcode-test/blob/583b25d9fe1a096bf565d4f87cb9365363ee61fd/main.go#L657
+    execute_action('boot simulator') do
+      simulator_app = '/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app'
+      _execute %Q(open "#{simulator_app}" "--args" "-CurrentDeviceUDID" "#{TEST_SIMULATOR.udid}")
+     # sleep 60
+    end
+  end
+
+  desc 'Bitrise build & test'
+  lane :bitrise do
+    boot_simulator # preboot simulator to avoid errors
+    deps
+    build_for_testing
+    test_without_building
+  end
+
   desc 'Install app deps'
   lane :deps do
     install_deps
@@ -39,21 +63,6 @@ platform :ios do
 
   desc 'test-without-building no video'
   lane :test_without_building do
-
-    # Error Domain=IDETestOperationsObserverErrorDomain
-    # Code=5 "Early unexpected exit, operation never finished bootstrapping - no restart will be attempted"
-
-    # boot simulator before running tests on bitrise.
-    # xcrun simctl boot will not boot a full simulator.
-    #
-    # https://github.com/bitrise-io/steps-xcode-test/blob/2e6d684446eef1a15b9792385c4487ab4fccdc05/xcodeutil/xcodeutil.go#L237
-    # https://github.com/bitrise-io/steps-xcode-test/blob/583b25d9fe1a096bf565d4f87cb9365363ee61fd/main.go#L657
-    execute_action('boot simulator') do
-      simulator_app = '/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app'
-      _execute %Q(open "#{simulator_app}" "--args" "-CurrentDeviceUDID" "#{TEST_SIMULATOR.udid}")
-      sleep 60
-    end
-
     begin
       Xcode8.test_without_building(scheme: SCHEME)
     ensure
@@ -68,7 +77,6 @@ brew install fbsimctl --HEAD)
   lane :test_without_building_video do
     # todo: bitrise errors with Connection refused - connect(2) for "localhost" port 8091 (localhost:8091)
     video_out = File.expand_path(File.join(__dir__, '..', 'video.mp4'))
-
     video_out = ENV['BITRISE_DEPLOY_DIR'] if bitrise?
 
     simulator = FBSimctl.new video_out: video_out
