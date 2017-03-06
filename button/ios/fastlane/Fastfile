@@ -2,6 +2,9 @@ fastlane_version '2.19.1' rescue update_fastlane
 
 default_platform :ios
 
+# Fix: Could not open terminal for stdout: $TERM not set
+ENV['TERM'] ||= 'dumb'
+
 require_relative 'fastlane_utils'
 require_relative 'xcode_8_xctestrun'
 require_relative 'fbsimctl'
