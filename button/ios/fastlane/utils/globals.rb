@@ -15,7 +15,7 @@ end
 if bitrise?
   # /bin/sh is bash on macOS & dash on Ubuntu
   # pipefail doesn't work on dash so default to bash
-  system 'sudo ln -sf bash /bin/sh'
+  system 'sudo ln -sf bash /bin/sh' unless RUBY_PLATFORM.include? 'darwin'
 end
 
 # Don't buffer.
