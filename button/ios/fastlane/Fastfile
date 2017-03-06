@@ -24,6 +24,16 @@ platform :ios do
 
   desc 'test-without-building no video'
   lane :test_without_building do
+
+    # Error Domain=IDETestOperationsObserverErrorDomain
+    # Code=5 "Early unexpected exit, operation never finished bootstrapping - no restart will be attempted"
+
+    # boot simulator before running tests on bitrise.
+
+    execute_action('boot simulator') do
+      _execute "xcrun simctl boot #{TEST_SIMULATOR.udid}"
+    end unless bitrise?
+
     begin
       Xcode8.test_without_building(scheme: SCHEME)
     ensure
