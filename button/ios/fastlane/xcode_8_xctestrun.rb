@@ -29,19 +29,28 @@ module Xcode8
       raise 'missing opts' unless args
       raise 'opts must be a hash' unless args.is_a?(Hash)
 
-      workspace = args.fetch(:workspace, nil)
-      scheme = args.fetch(:scheme)
-      destination = args.fetch(:destination, "platform=iOS Simulator,id=#{TEST_SIMULATOR.udid}")
+      workspace    = args.fetch(:workspace, nil)
+      scheme       = args.fetch(:scheme)
+      destination  = args.fetch(:destination, "platform=iOS Simulator,id=#{TEST_SIMULATOR.udid}")
       derived_data = args.fetch(:derived_data, 'xctestrun')
 
-      xcodebuild(
-          workspace: workspace,
-          scheme: scheme,
-          destination: destination,
+      args = {
+          workspace:       workspace,
+          scheme:          scheme,
+          destination:     destination,
           derivedDataPath: derived_data,
-          xcargs: command_name
-      )
-    end # def _xcodebuild
+          xcargs:          command_name,
+      }
+
+      if bitrise?
+        args.merge!(
+            report_formats: ['html'],
+            report_path:    '/Users/vagrant/deploy/xcode-test-results-button.html'
+        )
+      end
+
+      xcodebuild(args)
+    end
 
     # Executes xcodebuild build-for-testing
     def build_for_testing(args)

@@ -50,6 +50,8 @@ class InlineScreenshots
 
   def insert_screenshots
     input_html = Dir.glob("#{ENV['BITRISE_DEPLOY_DIR']}/xcode-test-results-*.html").first
+    abort "Xcode test results missing! #{input_html}" unless File.exist?(input_html)
+
     html       = Nokogiri::HTML(File.read(input_html))
 
     test_classes = html.css('#test-suites section.test-suite')
