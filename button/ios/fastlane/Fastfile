@@ -29,10 +29,10 @@ platform :ios do
     # Code=5 "Early unexpected exit, operation never finished bootstrapping - no restart will be attempted"
 
     # boot simulator before running tests on bitrise.
-
+    # xcrun simctl boot will not boot a full simulator.
     execute_action('boot simulator') do
-      _execute "xcrun simctl boot #{TEST_SIMULATOR.udid}"
-    end unless bitrise?
+      _execute "open -a Simulator --args -CurrentDeviceUDID #{TEST_SIMULATOR.udid}"
+    end
 
     begin
       Xcode8.test_without_building(scheme: SCHEME)
