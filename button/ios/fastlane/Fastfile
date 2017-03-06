@@ -75,7 +75,6 @@ Requires fbsimctl
 brew tap facebook/fb
 brew install fbsimctl --HEAD)
   lane :test_without_building_video do
-    # todo: bitrise errors with Connection refused - connect(2) for "localhost" port 8091 (localhost:8091)
     video_out = File.expand_path(File.join(__dir__, '..', 'video.mp4'))
     video_out = ENV['BITRISE_DEPLOY_DIR'] if bitrise?
 
