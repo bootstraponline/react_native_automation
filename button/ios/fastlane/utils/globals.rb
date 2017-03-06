@@ -6,3 +6,14 @@ end
 def repo_root_dir
   @repo_root_dir = join(__dir__, '..', '..')
 end
+
+def bitrise?
+  @bitrise ||= !!ENV['BITRISE_IO']
+end
+
+# Ensure bitrise is using bash
+if bitrise?
+  # /bin/sh is bash on macOS & dash on Ubuntu
+  # pipefail doesn't work on dash so default to bash
+  system 'sudo ln -sf bash /bin/sh'
+end
