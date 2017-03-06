@@ -18,7 +18,7 @@ require 'rubygems'
 require 'nokogiri'
 require 'base64'
 
-class Screenshots
+class InlineScreenshots
   attr_reader :test_screenshots, :screenshot_count
 
   def initialize
@@ -28,7 +28,7 @@ class Screenshots
 
   def run
     populate_screenshot_hash
-    inline_screenshots
+    insert_screenshots
   end
 
   def populate_screenshot_hash
@@ -48,7 +48,7 @@ class Screenshots
     Base64.encode64 File.read screenshot_path
   end
 
-  def inline_screenshots
+  def insert_screenshots
     input_html = Dir.glob("#{ENV['BITRISE_DEPLOY_DIR']}/xcode-test-results-*.html").first
     html       = Nokogiri::HTML(File.read(input_html))
 

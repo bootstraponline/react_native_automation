@@ -5,9 +5,11 @@ default_platform :ios
 require_relative 'fastlane_utils'
 require_relative 'xcode_8_xctestrun'
 require_relative 'fbsimctl'
+require_relative 'earl_grey_data'
 Xcode8.runner = self.runner
 
 SCHEME = 'buttonTests'
+APP_BUNDLE_ID = 'org.reactjs.native.example.button'
 
 platform :ios do
 
@@ -36,6 +38,8 @@ brew install fbsimctl --HEAD)
       simulator.stop_recording
       simulator.stop_server
       ui_important "Saved video to: #{video_out}"
+
+      EarlGreyData.new.collect APP_BUNDLE_ID
     end
   end
 end

@@ -12,6 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+def join(*args)
+  File.expand_path(File.join(*args))
+end
+
 # https://github.com/fastlane/fastlane/blob/7908e2af585ce859312972bc2bd9e361f4229b86/fastlane/lib/fastlane/fast_file.rb
 def fastlane_require(gem_name)
   Fastlane::FastlaneRequire.install_gem_if_needed(gem_name: gem_name, require_gem: true)
