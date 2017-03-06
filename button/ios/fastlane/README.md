@@ -38,6 +38,11 @@ build-for-testing
 ```
 fastlane ios test_without_building
 ```
+test-without-building no video
+### ios test_without_building_video
+```
+fastlane ios test_without_building_video
+```
 test-without-building.
 Requires fbsimctl
 brew tap facebook/fb

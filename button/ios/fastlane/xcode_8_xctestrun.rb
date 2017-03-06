@@ -19,11 +19,6 @@ module Xcode8
   class << self
     attr_accessor :runner
 
-    def xcodebuild(args)
-      raise 'nil runner' unless runner
-      runner.execute_action(:xcodebuild, ::Fastlane::Actions::XcodebuildAction, [args], custom_dir: nil)
-    end
-
     # args :scheme - required
     def _xcodebuild(command_name, args)
       raise 'missing opts' unless args
@@ -42,14 +37,21 @@ module Xcode8
           xcargs:          command_name,
       }
 
+      bitrise_report = ''
       if bitrise?
-        args.merge!(
-            report_formats: ['html'],
-            report_path:    '/Users/vagrant/deploy/xcode-test-results-button.html'
-        )
+        bitrise_report_format= 'html'
+        bitrise_report_path  = '/Users/vagrant/deploy/xcode-test-results-button.html'
+        bitrise_report       = %Q(--report" "#{bitrise_report_format}" "--output" "#{bitrise_report_path})
       end
 
-      xcodebuild(args)
+      execute_action("xcodebuild #{command_name}") do
+        _run_command %Q(
+           xcodebuild
+             -scheme "#{args[:scheme]}"
+             -destination "#{args[:destination]}"
+             -derivedDataPath "#{args[:derivedDataPath]}" #{command_name}
+           | xcpretty "--color" #{bitrise_report})
+      end
     end
 
     # Executes xcodebuild build-for-testing

@@ -5,6 +5,7 @@ default_platform :ios
 # Fix: Could not open terminal for stdout: $TERM not set
 ENV['TERM'] ||= 'dumb'
 
+require_relative 'utils/globals'
 require_relative 'fastlane_utils'
 require_relative 'xcode_8_xctestrun'
 require_relative 'fbsimctl'

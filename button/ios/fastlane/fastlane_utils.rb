@@ -12,8 +12,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def join(*args)
-  File.expand_path(File.join(*args))
+def _execute args={}
+  args = {command: args} if args.is_a?(String)
+  args[:command] = "set -o pipefail && #{args[:command]}" if args[:command].include? '|'
+
+  args[:print_all] = args.fetch(:print_all, true)
+  args[:print_command] = args.fetch(:print_command, true)
+
+  # 'fastlane' is the default cwd. change to parent dir.
+  dir = args.fetch(:dir, repo_root_dir)
+  args.delete(:dir)
+  Dir.chdir(dir) do
+    FastlaneCore::CommandExecutor.execute args
+  end
+end
+
+# Invoke execute_action to show up in the Fastlane step report.
+def execute_action name, &block
+  ::Fastlane::Actions.execute_action(name, &block)
+end
+
+def _run_command command
+  raise("nil command: #{command}") unless command
+  command = command.strip.split("\n").join(' ').gsub(/[ ]+/, ' ') # normalize spaces
+  _execute(command)
 end
 
 # https://github.com/fastlane/fastlane/blob/7908e2af585ce859312972bc2bd9e361f4229b86/fastlane/lib/fastlane/fast_file.rb
