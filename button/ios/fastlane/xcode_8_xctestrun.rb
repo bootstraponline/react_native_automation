@@ -41,7 +41,7 @@ module Xcode8
       if bitrise?
         bitrise_report_format= 'html'
         bitrise_report_path  = '/Users/vagrant/deploy/xcode-test-results-button.html'
-        bitrise_report       = %Q("--report" "#{bitrise_report_format}" "--output" "#{bitrise_report_path})
+        bitrise_report       = %Q("--report" "#{bitrise_report_format}" "--output" "#{bitrise_report_path}")
       end
 
       execute_action("xcodebuild #{command_name}") do
