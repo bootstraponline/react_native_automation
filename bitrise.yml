@@ -37,7 +37,7 @@ workflows:
             brew install fbsimctl --HEAD
     - fastlane:
         inputs:
-        - lane: test_without_building
+        - lane: bitrise
         - work_dir: "$BITRISE_SOURCE_DIR/button/ios"
     - deploy-to-bitrise-io:
         inputs:
