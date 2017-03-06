@@ -17,3 +17,6 @@ if bitrise?
   # pipefail doesn't work on dash so default to bash
   system 'sudo ln -sf bash /bin/sh'
 end
+
+# Don't buffer.
+[$stdout, $stderr].each { |output| output.sync = true }
