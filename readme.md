@@ -17,7 +17,7 @@ react-native init button
 ```
 cd ios
 gem install earlgrey
-earlgrey -t buttonTests # requires shared scheme
+earlgrey install -t buttonTests # requires shared scheme
 carthage update EarlGrey --platform ios
 ```
 
